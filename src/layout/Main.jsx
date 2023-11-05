@@ -3,10 +3,10 @@ import Header from "../pages/shared/Header";
 
 const Main = () => {
     return (
-        <>
+        <div className="font-inter">
             <Header />
             <Outlet />
-        </>
+        </div>
     );
 };
 
