@@ -82,7 +82,7 @@ const Featured = () => {
   ];
 
   return (
-    <section className="pt-10">
+    <section className="py-20">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}

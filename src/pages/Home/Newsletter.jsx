@@ -2,7 +2,7 @@ import newsletter from "../../assets/images/newsletter.jpg";
 
 const Newsletter = () => {
   return (
-    <section className="py-20">
+    <section className="pb-20">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-center">
           <img
