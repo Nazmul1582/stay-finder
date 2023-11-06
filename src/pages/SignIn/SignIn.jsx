@@ -1,15 +1,35 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import image from '../../assets/images/login.png'
 import googleImage from '../../assets/images/google.png'
+import { useState } from 'react';
+import useAuth from '../../hooks/useAuth';
 
 
 const SignIn = () => {
-    const handleSignIn = event => {
+    const [loading, setLoading] = useState()
+    const [error, setError] = useState("")
+    const {signIn} = useAuth();
+    const navigate = useNavigate()
+
+    const handleSignIn = async(event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+
+        if(password.length < 6){
+          return setError("Password must be 6 characters or longer.")
+        }
+        
+        try{
+          setError("")
+          setLoading(true)
+          await signIn(email, password)
+          navigate("/")
+        }catch(err){
+          setLoading(false)
+          setError(err.message)
+        }
     }
     return (
         <section className="py-10 bg-base-100">
@@ -49,7 +69,7 @@ const SignIn = () => {
                   />
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-success">Sign In</button>
+                  <button disabled={loading} className="btn btn-success">Sign In</button>
                 </div>
                 <div className="divider">OR</div>
                 <div className="form-control">
@@ -60,6 +80,7 @@ const SignIn = () => {
                 </div>
               </form>
               <p className='text-center mb-6'>If you are new here, Please <Link className='text-success font-bold underline' to="/signup">Sign Up</Link></p>
+              {error && <p className='text-center text-red-500 mb-6'>{error}</p>}
             </div>
           </div>
         </div>

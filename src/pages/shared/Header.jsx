@@ -48,7 +48,7 @@ const Header = () => {
               {navLinks}
             </ul>
           </div>
-          <Link to="/" className="text-3xl font-blackHanSans text-success">
+          <Link to="/" className="text-xl md:text-3xl font-blackHanSans text-success">
             StayFinder
           </Link>
         </div>
@@ -58,7 +58,7 @@ const Header = () => {
         <div className="navbar-end gap-3">
           {currentUser ? (
             <>
-              <p>{currentUser.displayName}</p>
+              <p className="font-bold">{currentUser.displayName}</p>
               <Link to="/sign-in" onClick={logout} className="btn btn-success">
                 Logout
               </Link>
