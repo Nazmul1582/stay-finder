@@ -1,17 +1,31 @@
 import { Link } from 'react-router-dom';
 import image from '../../assets/images/signup.png'
+import useAuth from '../../hooks/useAuth'
+import { useState } from 'react';
 
 const SignUp = () => {
-    const handleSignUp = event => {
+  const {createUser} = useAuth()
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState()
+
+    const handleSignUp = async(event) => {
         event.preventDefault();
         const form = event.target;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(name, email, password);
-
+        
+        try{
+          setError("")
+          setLoading(true);
+          await createUser(email, password, name)
+        }catch(err){
+          setLoading(false);
+          setError(err.message);
+        }        
     }
-  return (
+
+    return (
     <section className="py-20 bg-base-100">
       <div className="hero">
         <div className="hero-content flex-col lg:flex-row">
@@ -61,10 +75,11 @@ const SignUp = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-success">Sign Up</button>
+                <button disabled={loading} className="btn btn-success">Sign Up</button>
               </div>
             </form>
-            <p className='text-center mb-6'>Already have an account? <Link className='text-success font-bold underline' to="/sign-in">Sign In</Link></p>
+            <p className='text-center'>Already have an account? <Link className='text-success font-bold underline' to="/sign-in">Sign In</Link></p>
+            {error && <p className='text-center text-red-500 my-5'>{error}</p>}
           </div>
         </div>
       </div>
