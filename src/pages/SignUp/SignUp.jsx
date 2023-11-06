@@ -2,6 +2,15 @@ import { Link } from 'react-router-dom';
 import image from '../../assets/images/signup.png'
 
 const SignUp = () => {
+    const handleSignUp = event => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(name, email, password);
+
+    }
   return (
     <section className="py-20 bg-base-100">
       <div className="hero">
@@ -14,7 +23,7 @@ const SignUp = () => {
             <img src={image} alt="" />
           </div>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-xl shadow-success/30 bg-base-100 border border-success">
-            <form className="card-body">
+            <form onSubmit={handleSignUp} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Name</span>
@@ -22,6 +31,7 @@ const SignUp = () => {
                 <input
                   type="text"
                   placeholder="Name"
+                  name="name"
                   className="input input-bordered"
                   required
                 />
@@ -32,6 +42,7 @@ const SignUp = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
                   placeholder="email"
                   className="input input-bordered"
                   required
@@ -43,6 +54,7 @@ const SignUp = () => {
                 </label>
                 <input
                   type="password"
+                  name="password"
                   placeholder="password"
                   className="input input-bordered"
                   required
