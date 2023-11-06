@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="p-10 bg-base-200 text-base-content">
-      <div className="footer continer mx-auto">
+      <div className="footer container mx-auto">
         <aside>
           <Link to="/" className="text-3xl font-blackHanSans text-success">
             StayFinder

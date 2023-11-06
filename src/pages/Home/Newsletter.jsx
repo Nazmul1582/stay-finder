@@ -4,13 +4,13 @@ const Newsletter = () => {
   return (
     <section className="py-20">
       <div className="container mx-auto">
-        <div className="grid grid-cols-2 gap-6 items-center justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center justify-center">
           <img
             className="w-full rounded-xl"
             src={newsletter}
             alt="newsletter image"
           />
-          <div className="">
+          <div className="mx-auto">
             <h2 className="text-3xl font-bold">Subscribe to our Newsletter!</h2>
             <p className="mt-3 mb-6 text-gray-400">Subscribe our newsletter and stay updated</p>
             <div className="flex gap-3">

@@ -54,7 +54,7 @@ const Header = () => {
         </div>
         <div className="navbar-end gap-3">
           <a className="btn btn-success btn-outline">Sign In</a>
-          <a className="btn btn-success">Sign Up</a>
+          <a className="btn btn-success hidden md:flex">Sign Up</a>
         </div>
       </div>
     </div>
