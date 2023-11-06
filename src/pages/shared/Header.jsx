@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const Header = () => {
+  const { currentUser, logout } = useAuth();
+
   const navLinks = (
     <>
       <li>
@@ -53,8 +56,23 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end gap-3">
-          <Link to="/sign-in" className="btn btn-success btn-outline">Sign In</Link>
-          <Link to="/signup" className="btn btn-success hidden md:flex">Sign Up</Link>
+          {currentUser ? (
+            <>
+              <p>{currentUser.displayName}</p>
+              <Link to="/sign-in" onClick={logout} className="btn btn-success">
+                Logout
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/sign-in" className="btn btn-success btn-outline">
+                Sign In
+              </Link>
+              <Link to="/signup" className="btn btn-success hidden md:flex">
+                Sign Up
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>
