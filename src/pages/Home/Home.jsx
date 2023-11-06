@@ -1,5 +1,6 @@
 import Hero from "./Hero";
 import Newsletter from "./Newsletter";
+import SpecialOffers from "./SpecialOffers";
 import Testimonial from "./Testimonial";
 
 const Home = () => {
@@ -7,6 +8,7 @@ const Home = () => {
         <>
             <Hero />
             <Testimonial />
+            <SpecialOffers />
             <Newsletter />
         </>
     );
