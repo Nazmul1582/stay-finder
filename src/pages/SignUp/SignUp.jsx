@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import image from '../../assets/images/undraw_Sign_in_re_o58h.png'
+import image from '../../assets/images/signup.png'
 
 const SignUp = () => {
   return (

@@ -53,8 +53,8 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
         <div className="navbar-end gap-3">
-          <a className="btn btn-success btn-outline">Sign In</a>
-          <a className="btn btn-success hidden md:flex">Sign Up</a>
+          <Link to="/sign-in" className="btn btn-success btn-outline">Sign In</Link>
+          <Link to="/signup" className="btn btn-success hidden md:flex">Sign Up</Link>
         </div>
       </div>
     </div>
