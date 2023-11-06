@@ -1,3 +1,4 @@
+import Featured from "./Featured";
 import Hero from "./Hero";
 import Newsletter from "./Newsletter";
 import SpecialOffers from "./SpecialOffers";
@@ -7,6 +8,7 @@ const Home = () => {
     return (
         <>
             <Hero />
+            <Featured />
             <Testimonial />
             <SpecialOffers />
             <Newsletter />
