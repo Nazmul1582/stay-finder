@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import image from '../../assets/images/signup.png'
 import useAuth from '../../hooks/useAuth'
 import { useState } from 'react';
@@ -7,6 +7,7 @@ const SignUp = () => {
   const {createUser} = useAuth()
   const [error, setError] = useState("");
   const [loading, setLoading] = useState()
+  const navigate = useNavigate()
 
     const handleSignUp = async(event) => {
         event.preventDefault();
@@ -14,11 +15,16 @@ const SignUp = () => {
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
+
+        if(password.length < 6){
+          return setError("Password must be 6 characters or longer.")
+        }
         
         try{
           setError("")
           setLoading(true);
           await createUser(email, password, name)
+          navigate("/")
         }catch(err){
           setLoading(false);
           setError(err.message);
@@ -78,8 +84,8 @@ const SignUp = () => {
                 <button disabled={loading} className="btn btn-success">Sign Up</button>
               </div>
             </form>
-            <p className='text-center'>Already have an account? <Link className='text-success font-bold underline' to="/sign-in">Sign In</Link></p>
-            {error && <p className='text-center text-red-500 my-5'>{error}</p>}
+            <p className='text-center mb-6'>Already have an account? <Link className='text-success font-bold underline' to="/sign-in">Sign In</Link></p>
+            {error && <p className='text-center text-red-500 mb-6'>{error}</p>}
           </div>
         </div>
       </div>
