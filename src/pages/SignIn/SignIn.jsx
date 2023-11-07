@@ -8,7 +8,7 @@ import useAuth from '../../hooks/useAuth';
 const SignIn = () => {
     const [loading, setLoading] = useState()
     const [error, setError] = useState("")
-    const {signIn} = useAuth();
+    const { signIn, signInWithGoogle } = useAuth();
     const navigate = useNavigate()
 
     const handleSignIn = async(event) => {
@@ -31,6 +31,19 @@ const SignIn = () => {
           setError(err.message)
         }
     }
+    const handleSignInWithGoogle = async() => {
+      try{
+        setError("")
+        setLoading(true)
+        await signInWithGoogle()
+        navigate("/")
+      }catch(err){
+        setLoading(false)
+        setError(err.message)
+      }
+
+    }
+
     return (
         <section className="py-10 bg-base-100">
         <div className="hero">
@@ -73,7 +86,7 @@ const SignIn = () => {
                 </div>
                 <div className="divider">OR</div>
                 <div className="form-control">
-                  <button className="btn btn-success bg-white hover:bg-white hover:shadow-success/30 hover:shadow-lg">
+                  <button onClick={handleSignInWithGoogle} className="btn btn-success bg-white hover:bg-white hover:shadow-success/30 hover:shadow-lg">
                     <img className='w-10' src={googleImage} alt="google logo" />
                     Sign In with Google
                 </button>

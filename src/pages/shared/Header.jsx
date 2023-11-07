@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
+import userImage from '../../assets/images/user.png'
 
 const Header = () => {
   const { currentUser, logout } = useAuth();
@@ -58,7 +59,10 @@ const Header = () => {
         <div className="navbar-end gap-3">
           {currentUser ? (
             <>
-              <p className="font-bold">{currentUser.displayName}</p>
+              <div className="flex items-center gap-1">
+                <p className="font-bold hidden md:block">{currentUser.displayName}</p>
+                <img className="w-12 h-12 rounded-full border-2 border-success" src={currentUser.photoURL ? currentUser.photoURL : userImage} alt="user image" />
+              </div>
               <Link to="/sign-in" onClick={logout} className="btn btn-success">
                 Logout
               </Link>
