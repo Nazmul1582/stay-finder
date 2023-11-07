@@ -8,11 +8,13 @@ import MyBookings from "../pages/MyBookings/MyBookings";
 import Contact from "../pages/Contact/Contact";
 import PrivateRoute from "./PrivateRoute";
 import RoomDetails from "../pages/RoomDetails/RoomDetails";
+import NotFound from "../pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
+        errorElement: <NotFound />,
         children: ([
             {
                 path: "/",
