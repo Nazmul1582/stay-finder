@@ -1,25 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Review from "./Review";
 
 const RoomDetails = () => {
-  const room = {
-    name: "Luxury Spa Suite",
-    image: "https://i.ibb.co/rsx9Hbb/hammocks-with-palm-trees.jpg",
-    description:
-      "Indulge in relaxation and rejuvenation in our Luxury Spa Suite. This spacious suite includes a private spa tub, a king-size bed, and a separate spa lounge.",
-    pricePerNight: 349,
-    roomSize: "800 sq. ft",
-    availability: false,
-    images: [
-      "https://i.ibb.co/QQm4qBs/view-pool-hotel-ocean-water.jpg",
-      "https://i.ibb.co/rsx9Hbb/hammocks-with-palm-trees.jpg",
-      "https://i.ibb.co/g4SSQfL/elegant-hotel-room-with-big-bed.jpg",
-    ],
-    reviews: [
-      { name: "Robert", rating: 5, comment: "Absolutely loved the spa tub!" },
-    ],
-    specialOffers: ["Complimentary spa access", "Room service available"],
-  };
+  const room = useLoaderData();
+
   const {
     image,
     name,
@@ -64,9 +48,9 @@ const RoomDetails = () => {
               </p>
               <p>
                 {" "}
-                Available Seat:{" "}
+                Availability:{" "}
                 <span className="font-semibold">
-                  {availability ? availability : 0}
+                  {availability ? "available" : 'unavailable'}
                 </span>
               </p>
               <p>
@@ -84,19 +68,19 @@ const RoomDetails = () => {
         <div>
           <h2 className="text-3xl font-bold mt-12 mb-6">{name}</h2>
           <p className="text-slate-500">{description}</p>
-          {reviews && (
+          {reviews.length > 0 && (
             <h2 className="text-xl font-bold mt-6 mb-3">Customer Reviews</h2>
           )}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {reviews &&
+            {reviews.length > 0 &&
               reviews.map((review, index) => (
                 <Review review={review} key={index} />
               ))}
           </div>
-          {specialOffers && (
+          {specialOffers.length > 0 && (
             <h2 className="text-xl font-bold mt-6 mb-3">Special Offers!</h2>
           )}
-          {specialOffers &&
+          {specialOffers.length > 0 &&
             specialOffers.map((offer, index) => (
               <div key={index}>
                 <p className="text-semibold">

@@ -10,7 +10,7 @@ const Rooms = () => {
           {rooms.map((room) => (
             <div key={room._id} className="card bg-base-100 shadow-xl">
               <figure className="relative group">
-                <Link to="/room-details">
+                <Link to={`/room-details/${room._id}`}>
                   <img src={room.image} alt="image of room" />
                   <div className="absolute inset-0  bg-gradient-to-b from-transparent to-black opacity-0 hover:opacity-70 transition-opacity duration-300"></div>
                 </Link>
