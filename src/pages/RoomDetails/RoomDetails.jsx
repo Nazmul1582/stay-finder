@@ -55,7 +55,7 @@ const RoomDetails = () => {
               </p>
               <p>
                 Price per night:{" "}
-                <span className="font-semibold">{pricePerNight}</span>
+                <span className="font-semibold">${pricePerNight}</span>
               </p>
               <p className="text-slate-500 my-3">{description}</p>
               <Link to="">

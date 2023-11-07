@@ -1,10 +1,19 @@
 import { Link, useLoaderData } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import { useState } from "react";
 
 const Rooms = () => {
-  const rooms = useLoaderData();
+  const loadedRooms = useLoaderData();
+  const [rooms, setRooms] = useState(loadedRooms)
+
+  const customAxios = useAxios()
   const handleFilter = event => {
-    const input = event.target.value;
-    console.log(input);
+    const order = event.target.value;
+    customAxios.get(`/rooms?sortField=pricePerNight&sortOrder=${order}`)
+    .then(res => {
+      setRooms(res.data)
+    })
+    .catch(err => console.log(err.message))
   }
 
   return (
@@ -13,14 +22,14 @@ const Rooms = () => {
 
         <div className="form-control mb-20">
           <div className="input-group items-center justify-center">
-            <select onChange={handleFilter} className="select select-bordered focus:outline-0 w-full md:w-1/2">
+            <select onChange={handleFilter} className="select select-bordered border-success focus:outline-0 w-full md:w-1/2">
               <option disabled selected>
                 Filter by price
               </option>
               <option value="asc">low to height</option>
               <option value="desc">height to low</option>
             </select>
-            <button className="btn">Filter</button>
+            <button className="btn btn-success">Filter</button>
           </div>
         </div>
 
