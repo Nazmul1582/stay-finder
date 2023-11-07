@@ -1,40 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Rooms = () => {
-  const rooms = [
-    {
-      _id: 1,
-      image: "https://i.ibb.co/g4SSQfL/elegant-hotel-room-with-big-bed.jpg",
-      name: "Garden View Bungalow",
-      description:
-        "Experience the serenity of our Garden View Bungalow. This cozy bungalow offers a private garden view, a queen-size bed, and a tranquil outdoor space.",
-      pricePerNight: 199,
-      roomSize: "500 sq. ft",
-      availability: true,
-      images: [
-        "garden-view-bungalow-image1.jpg",
-        "garden-view-bungalow-image2.jpg",
-      ],
-      reviews: [],
-      specialOffers: [],
-    },
-    {
-      _id: 2,
-      image: "https://i.ibb.co/g4SSQfL/elegant-hotel-room-with-big-bed.jpg",
-      name: "Garden View Bungalow",
-      description:
-        "Experience the serenity of our Garden View Bungalow. This cozy bungalow offers a private garden view, a queen-size bed, and a tranquil outdoor space.",
-      pricePerNight: 199,
-      roomSize: "500 sq. ft",
-      availability: true,
-      images: [
-        "garden-view-bungalow-image1.jpg",
-        "garden-view-bungalow-image2.jpg",
-      ],
-      reviews: [],
-      specialOffers: [],
-    },
-  ];
+  const rooms = useLoaderData()
+
   return (
     <section className="py-20">
       <div className="container mx-auto">

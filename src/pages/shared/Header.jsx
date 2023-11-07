@@ -22,7 +22,7 @@ const Header = () => {
     </>
   );
   return (
-    <div className="bg-base-100 py-3">
+    <div className="bg-base-200 py-3 border-b border-success">
       <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
