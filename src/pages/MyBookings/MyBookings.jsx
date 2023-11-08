@@ -1,12 +1,22 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const MyBookings = () => {
-  const loadedBookings = useLoaderData();
-  const [bookings, setBookings] = useState(loadedBookings);
+  const [bookings, setBookings] = useState([]);
   const customAxios = useAxios();
+  const { currentUser } = useAuth();
+
+  useEffect(() => {
+    customAxios
+      .get(`/bookings?email=${currentUser.email}`)
+      .then((res) => {
+        setBookings(res.data);
+      })
+      .catch((err) => console.log(err.message));
+  }, [currentUser, customAxios]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -76,10 +86,17 @@ const MyBookings = () => {
                   <th></th>
                 </tr>
               </thead>
-              
-            ) : 
-            <h2 className="text-center text-3xl font-bold">You have not booked any room yet!</h2>
-            }
+            ) : (
+              <tbody>
+                <tr>
+                  <td>
+                    <h2 className="text-center text-3xl font-bold">
+                      You have not any booked room!
+                    </h2>
+                  </td>
+                </tr>
+              </tbody>
+            )}
             <tbody>
               {/* row */}
               {bookings.map((book) => (
@@ -105,10 +122,12 @@ const MyBookings = () => {
                   <td>${book.pricePerNight}</td>
                   <td>{book.date}</td>
                   <th>
-                    <Link to={`/update/${book._id}`}><button className="btn btn-success mx-2">
-                      Update Date
-                    </button></Link>
-                    
+                    <Link to={`/update/${book._id}`}>
+                      <button className="btn btn-success mx-2">
+                        Update Date
+                      </button>
+                    </Link>
+
                     <button
                       onClick={() => handleDelete(book._id)}
                       className="btn btn-error mx-2"
