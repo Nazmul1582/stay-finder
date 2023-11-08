@@ -44,7 +44,8 @@ const Rooms = () => {
               </figure>
               <div className="card-body">
                 <h2 className="card-title">{room.name}</h2>
-                {room.reviews && <p>Total reviews: {room.reviews.length}</p>}
+                {room.reviews && <p>Total reviews: <span className="font-bold">{room.reviews.length}</span></p>}
+                <p>Price Per Night: <span className="font-bold">${room.pricePerNight}</span></p>
               </div>
             </div>
           ))}

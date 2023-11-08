@@ -1,11 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
 import { useState } from "react";
 
 const MyBookings = () => {
   const loadedBookings = useLoaderData();
-  const [bookings, setBookings] = useState(loadedBookings)
+  const [bookings, setBookings] = useState(loadedBookings);
   const customAxios = useAxios();
 
   const handleDelete = (id) => {
@@ -24,7 +24,9 @@ const MyBookings = () => {
           .then((res) => {
             console.log(res.data);
             if (res.data.deletedCount > 0) {
-              const remaining = bookings.filter(booking => booking._id !== id)
+              const remaining = bookings.filter(
+                (booking) => booking._id !== id
+              );
               setBookings(remaining);
               Swal.fire({
                 title: "Deleted!",
@@ -64,15 +66,20 @@ const MyBookings = () => {
         <div className="overflow-x-auto">
           <table className="table">
             {/* head */}
-            <thead>
-              <tr>
-                <th>Booking</th>
-                <th>Prise Per Night</th>
-                <th>Date</th>
-                <th>Action</th>
-                <th></th>
-              </tr>
-            </thead>
+            {bookings.length > 0 ? (
+              <thead>
+                <tr>
+                  <th>Booking</th>
+                  <th>Prise Per Night</th>
+                  <th>Date</th>
+                  <th>Action</th>
+                  <th></th>
+                </tr>
+              </thead>
+              
+            ) : 
+            <h2 className="text-center text-3xl font-bold">You have not booked any room yet!</h2>
+            }
             <tbody>
               {/* row */}
               {bookings.map((book) => (
@@ -89,16 +96,19 @@ const MyBookings = () => {
                       </div>
                       <div>
                         <div className="font-bold mb-3">{book.name}</div>
-                        <button className="btn btn-info btn-sm">Give a review</button>
+                        <button className="btn btn-info btn-sm">
+                          Give a review
+                        </button>
                       </div>
                     </div>
                   </td>
                   <td>${book.pricePerNight}</td>
                   <td>{book.date}</td>
                   <th>
-                    <button className="btn btn-success mx-2">
-                      Update
-                    </button>
+                    <Link to={`/update/${book._id}`}><button className="btn btn-success mx-2">
+                      Update Date
+                    </button></Link>
+                    
                     <button
                       onClick={() => handleDelete(book._id)}
                       className="btn btn-error mx-2"
