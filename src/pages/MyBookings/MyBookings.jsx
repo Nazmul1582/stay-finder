@@ -1,9 +1,48 @@
-import { AiOutlineClose } from "react-icons/ai";
 import { useLoaderData } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const MyBookings = () => {
   const loadedBookings = useLoaderData();
-  console.log(loadedBookings);
+  const [bookings, setBookings] = useState(loadedBookings)
+  const customAxios = useAxios();
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        customAxios
+          .delete(`/bookings/${id}`)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data.deletedCount > 0) {
+              const remaining = bookings.filter(booking => booking._id !== id)
+              setBookings(remaining);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your booking has been deleted.",
+                icon: "success",
+              });
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: err.message,
+            });
+          });
+      }
+    });
+  };
   return (
     <section>
       <div>
@@ -27,7 +66,6 @@ const MyBookings = () => {
             {/* head */}
             <thead>
               <tr>
-                <th></th>
                 <th>Booking</th>
                 <th>Prise Per Night</th>
                 <th>Date</th>
@@ -37,13 +75,8 @@ const MyBookings = () => {
             </thead>
             <tbody>
               {/* row */}
-              {loadedBookings.map((book) => (
+              {bookings.map((book) => (
                 <tr key={book._id}>
-                  <th>
-                    <button className="btn btn-circle btn-sm btn-outline">
-                      <AiOutlineClose />
-                    </button>
-                  </th>
                   <td>
                     <div className="flex items-center space-x-3">
                       <div className="avatar">
@@ -55,17 +88,21 @@ const MyBookings = () => {
                         </div>
                       </div>
                       <div>
-                        <div className="font-bold">{book.name}</div>
+                        <div className="font-bold mb-3">{book.name}</div>
+                        <button className="btn btn-info btn-sm">Give a review</button>
                       </div>
                     </div>
                   </td>
                   <td>${book.pricePerNight}</td>
                   <td>{book.date}</td>
                   <th>
-                    <button className="btn btn-success btn-sm mx-2">
+                    <button className="btn btn-success mx-2">
                       Update
                     </button>
-                    <button className="btn btn-error btn-sm mx-2">
+                    <button
+                      onClick={() => handleDelete(book._id)}
+                      className="btn btn-error mx-2"
+                    >
                       Delete
                     </button>
                   </th>
