@@ -16,7 +16,7 @@ const MyBookings = () => {
         setBookings(res.data);
       })
       .catch((err) => console.log(err.message));
-  }, [currentUser, customAxios]);
+  }, [currentUser?.email, customAxios]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -113,9 +113,11 @@ const MyBookings = () => {
                       </div>
                       <div>
                         <div className="font-bold mb-3">{book.name}</div>
-                        <button className="btn btn-info btn-sm">
-                          Give a review
-                        </button>
+                        <Link to={`/review/${book._id}`}>
+                          <button className="btn btn-info btn-sm">
+                            Give a review
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </td>
@@ -123,16 +125,15 @@ const MyBookings = () => {
                   <td>{book.date}</td>
                   <th>
                     <Link to={`/update/${book._id}`}>
-                      <button className="btn btn-success mx-2">
+                      <button className="btn btn-success btn-sm m-2">
                         Update Date
                       </button>
                     </Link>
-
                     <button
                       onClick={() => handleDelete(book._id)}
-                      className="btn btn-error mx-2"
+                      className="btn btn-error btn-sm m-2"
                     >
-                      Delete
+                      Cancel
                     </button>
                   </th>
                 </tr>

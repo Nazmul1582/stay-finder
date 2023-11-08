@@ -36,6 +36,7 @@ const RoomDetails = () => {
     }
 
     const booking = {
+      productId: _id,
       email: currentUser.email,
       image,
       name,
@@ -86,7 +87,7 @@ const RoomDetails = () => {
         // update room
         setAvailable(available - 1);
         customAxios
-        .patch(`/rooms/${_id}`, {seat: available})
+        .patch(`/rooms/${_id}`, {seat: available -1})
         .then((res) => {
           console.log(res.data);
         })
