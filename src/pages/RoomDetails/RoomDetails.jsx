@@ -83,7 +83,7 @@ const RoomDetails = () => {
 
   return (
     <section className="pb-20">
-      <div className="py-10">
+      <div>
         <div className="h-[300px] relative">
           <img
             src={image}
@@ -98,7 +98,7 @@ const RoomDetails = () => {
         </div>
       </div>
 
-      <div className="container mx-auto">
+      <div className="container mx-auto pt-10">
         <div className="col-span-2 mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-6">
             <img
