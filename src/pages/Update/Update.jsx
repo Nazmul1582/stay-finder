@@ -1,8 +1,9 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
 
 const Update = () => {
+  const navigate = useNavigate();
   const room = useLoaderData();
   const {
     _id,
@@ -27,6 +28,7 @@ const Update = () => {
                 text: "You have updated your booking date!",
                 icon: "success"
               });
+              navigate(-1)
         }
     })
     .catch(err => {
