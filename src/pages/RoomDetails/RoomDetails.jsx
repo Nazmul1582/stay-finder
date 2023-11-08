@@ -3,6 +3,7 @@ import Review from "./Review";
 import useAxios from "../../hooks/useAxios";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const RoomDetails = () => {
   const room = useLoaderData();
@@ -27,7 +28,11 @@ const RoomDetails = () => {
     const date = event.target.date.value;
 
     if (!available) {
-      return alert("No seat is available!");
+      return Swal.fire({
+        title: "Oops!",
+        text: "No seat is available!",
+        icon: "error"
+      });
     }
 
     const booking = {
@@ -43,9 +48,22 @@ const RoomDetails = () => {
     customAxios
       .post(`/bookings`, booking)
       .then((res) => {
-        console.log(res);
+        if(res.data.insertedId){
+          Swal.fire({
+            title: "Good job!",
+            text: "You booked successfully!",
+            icon: "success"
+          });
+        }
+        event.target.reset();
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        Swal.fire({
+          title: "Oops!",
+          text: err.message,
+          icon: "error"
+        });
+      });
 
     setAvailable(available - 1);
 
@@ -54,7 +72,13 @@ const RoomDetails = () => {
       .then((res) => {
         console.log(res.data);
       })
-      .catch((err) => console.log(err.message));
+      .catch((err) => {
+        Swal.fire({
+          title: "Oops!",
+          text: err.message,
+          icon: "error"
+        });
+      });
   };
 
   return (
