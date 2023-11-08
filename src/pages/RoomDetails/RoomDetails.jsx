@@ -1,10 +1,14 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import Review from "./Review";
+import useAxios from "../../hooks/useAxios";
+import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
 
 const RoomDetails = () => {
   const room = useLoaderData();
-
+  const customAxios = useAxios();
   const {
+    _id,
     image,
     name,
     description,
@@ -15,6 +19,44 @@ const RoomDetails = () => {
     images,
     specialOffers,
   } = room;
+  const [available, setAvailable] = useState(availability);
+  const { currentUser } = useAuth();
+
+  const handleBooking = (event) => {
+    event.preventDefault();
+    const date = event.target.date.value;
+
+    if (!available) {
+      return alert("No seat is available!");
+    }
+
+    const booking = {
+      email: currentUser.email,
+      image,
+      name,
+      date,
+      availability: true,
+      pricePerNight,
+      description,
+    };
+
+    customAxios
+      .post(`/bookings`, booking)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err.message));
+
+    setAvailable(available - 1);
+
+    customAxios
+      .patch(`/rooms/${_id}`, {seat: available})
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err.message));
+  };
+
   return (
     <section className="pb-20">
       <div className="py-10">
@@ -48,19 +90,27 @@ const RoomDetails = () => {
               </p>
               <p>
                 {" "}
-                Availability:{" "}
+                Available Seats:{" "}
                 <span className="font-semibold">
-                  {availability ? "available" : 'unavailable'}
+                  {available ? available : "unavailable"}
                 </span>
               </p>
               <p>
                 Price per night:{" "}
                 <span className="font-semibold">${pricePerNight}</span>
               </p>
-              <p className="text-slate-500 my-3">{description}</p>
-              <Link to="">
-                <button className="btn btn-success">Book Now</button>
-              </Link>
+              <p className="text-slate-500 my-6">{description}</p>
+              <form onSubmit={handleBooking} className="form-control">
+                <div className="input-group">
+                  <input
+                    name="date"
+                    type="date"
+                    required
+                    className="input input-bordered border-success focus:outline-0"
+                  />
+                  <button className="btn btn-success">Book Now</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
