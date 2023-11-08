@@ -45,40 +45,60 @@ const RoomDetails = () => {
       description,
     };
 
-    customAxios
-      .post(`/bookings`, booking)
-      .then((res) => {
-        if(res.data.insertedId){
+    Swal.fire({
+      html:`
+      <div class="text-left text-sm">
+        <p class="mb-2"><span class="font-bold">Booking:</span> ${name}</p>
+        <p class="mb-2"><span class="font-bold">Price per night:</span>$ ${pricePerNight}</p>
+        <p class="mb-2"><span class="font-bold">Date:</span> ${date}</p>
+        <p class="mb-2"><span class="font-bold">Description:</span> ${description}</p>
+      </div>
+      `,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Confirm!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+        // booking
+        customAxios
+        .post(`/bookings`, booking)
+        .then((res) => {
+          if(res.data.insertedId){
+            Swal.fire({
+              title: "Good job!",
+              text: "You booked successfully!",
+              icon: "success"
+            });
+          }
+          event.target.reset();
+        })
+        .catch((err) => {
           Swal.fire({
-            title: "Good job!",
-            text: "You booked successfully!",
-            icon: "success"
+            title: "Oops!",
+            text: err.message,
+            icon: "error"
           });
-        }
-        event.target.reset();
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Oops!",
-          text: err.message,
-          icon: "error"
         });
-      });
-
-    setAvailable(available - 1);
-
-    customAxios
-      .patch(`/rooms/${_id}`, {seat: available})
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        Swal.fire({
-          title: "Oops!",
-          text: err.message,
-          icon: "error"
+        
+        // update room
+        setAvailable(available - 1);
+        customAxios
+        .patch(`/rooms/${_id}`, {seat: available})
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          Swal.fire({
+            title: "Oops!",
+            text: err.message,
+            icon: "error"
+          });
         });
-      });
+      }
+    });
   };
 
   return (
