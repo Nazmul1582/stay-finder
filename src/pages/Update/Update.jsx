@@ -1,20 +1,41 @@
 import { useLoaderData } from "react-router-dom";
+import useAxios from "../../hooks/useAxios";
+import Swal from "sweetalert2";
 
 const Update = () => {
   const room = useLoaderData();
   const {
+    _id,
     date,
     image,
     name,
     description,
     pricePerNight,
   } = room;
+  const customAxios = useAxios();
 
   const handleUpdate = (event) => {
     event.preventDefault();
     const newDate = event.target.date.value;
     const updatedDate = {date: newDate}
-    console.log(updatedDate);
+    
+    customAxios.patch(`/bookings/${_id}`, updatedDate)
+    .then(res => {
+        if(res.data.modifiedCount > 0){
+            Swal.fire({
+                title: "Good job!",
+                text: "You have updated your booking date!",
+                icon: "success"
+              });
+        }
+    })
+    .catch(err => {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.message,
+          });
+    })
   }
 
   return (
