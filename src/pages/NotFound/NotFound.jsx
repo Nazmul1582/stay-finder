@@ -10,7 +10,7 @@ const NotFound = () => {
             <Head pageTitle="Not Found" />
             <div className="container mx-auto">
                 <div className="grid place-items-center">
-                    <img className="max-w-lg" src={image} alt="page not found" />
+                    <img className="max-w-xs lg:max-w-lg" src={image} alt="page not found" />
                     <Link to="/"><button className="btn btn-success">Go To Home</button></Link>
                 </div>
             </div>
