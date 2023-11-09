@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const SpecialOffers = () => {
   return (
     <section
@@ -17,7 +19,7 @@ const SpecialOffers = () => {
             Summer Escape package with discounts on room rates, complimentary
             breakfast, and beachside activities.
           </p>
-          <button className="btn btn-success">Book Now</button>
+          <Link to="/rooms"><button className="btn btn-success">Book Now</button></Link>
         </div>
         <div className="justify-self-center bg-success p-5 w-52 h-52 rounded-full grid place-items-center shadow-md shadow-success">
             <div className="text-center font-semibold">
