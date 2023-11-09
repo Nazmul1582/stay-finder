@@ -15,8 +15,9 @@ const Feedback = () => {
     const name = currentUser.displayName;
     const rating = parseInt(form.rating.value);
     const comment = form.comment.value;
+    const timestamp = new Date();
 
-    const review = { name, rating, comment };
+    const review = { name, rating, comment, timestamp };
     customAxios
       .patch(`/room-review/${booking.productId}`, review)
       .then(() => {
