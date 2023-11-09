@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
 import Head from "../../layout/Head";
+import Banner from "../shared/Banner";
 
 const Feedback = () => {
   const booking = useLoaderData();
@@ -41,18 +42,7 @@ const Feedback = () => {
   return (
     <section>
       <Head pageTitle="Review" />
-      <div className="h-[300px] relative">
-        <img
-          src="https://i.ibb.co/t8JnrVb/luxury-hotel-outdoor-pools-turkey.jpg"
-          className="h-full w-full object-cover"
-          alt="banner image"
-        />
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gradient-to-r from-black/60 from-0% to-black/30 to-100%">
-          <h2 className="text-white text-center text-5xl font-bold">
-            Review Page
-          </h2>
-        </div>
-      </div>
+      <Banner title="Review" />
 
       <div className="container mx-auto py-20">
         <div className="max-w-lg shadow-xl shadow-success/50 border border-success rounded-xl p-6 mx-auto">

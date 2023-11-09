@@ -1,21 +1,11 @@
 import Head from "../../layout/Head";
+import Banner from "../shared/Banner";
 
 const About = () => {
   return (
     <section>
-      <Head pageTitle="Contact" />
-      <div className="h-[300px] relative">
-        <img
-          src="https://i.ibb.co/t8JnrVb/luxury-hotel-outdoor-pools-turkey.jpg"
-          className="h-full w-full object-cover"
-          alt="banner image"
-        />
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gradient-to-r from-black/80 from-0% to-black/50 to-100%">
-          <h2 className="text-white text-center text-5xl font-bold">
-            About Us
-          </h2>
-        </div>
-      </div>
+      <Head pageTitle="About" />
+      <Banner title="About" />
       <div className="container mx-auto pt-10 pb-20">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold underline underline-offset-8 decoration-success">

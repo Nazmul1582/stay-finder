@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import Head from "../../layout/Head";
 import GoogleMapReact from "google-map-react";
 import { FaLocationDot } from "react-icons/fa6";
+import Banner from "../shared/Banner";
 
 const Contact = () => {
   const handleContact = (event) => {
@@ -33,18 +34,7 @@ const Contact = () => {
   return (
     <section className="pb-20 bg-base-100">
       <Head pageTitle="Contact" />
-      <div className="h-[300px] relative">
-        <img
-          src="https://i.ibb.co/t8JnrVb/luxury-hotel-outdoor-pools-turkey.jpg"
-          className="h-full w-full object-cover"
-          alt="banner image"
-        />
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gradient-to-r from-black/60 from-0% to-black/30 to-100%">
-          <h2 className="text-white text-center text-5xl font-bold">
-            Contact With Us
-          </h2>
-        </div>
-      </div>
+      <Banner title="Contact With Us" />
 
       <div className="container mx-auto pt-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 import Head from "../../layout/Head";
+import Banner from "../shared/Banner";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -69,55 +70,10 @@ const MyBookings = () => {
     });
   };
 
-  const handleUpdateDate = async (id) => {
-    const { value: date } = await Swal.fire({
-      title: "Update your booking date",
-      input: "date",
-      showCancelButton: true,
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Confirm",
-      confirmButtonColor: "#36D399"
-    });
-    if (date) {
-      const updatedDate = { date: date };
-      customAxios
-        .patch(`/bookings/${id}`, updatedDate)
-        .then((res) => {
-          if (res.data.modifiedCount > 0) {
-            Swal.fire({
-              title: "Updated!",
-              text: `Your booking date has been updated to ${date}.`,
-              icon: "success",
-            });
-          }
-        })
-        .catch((err) => {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: err.message,
-          });
-        });
-    }
-  };
-
   return (
     <section>
       <Head pageTitle="My Booking" />
-      <div>
-        <div className="h-[300px] relative">
-          <img
-            src="https://i.ibb.co/t8JnrVb/luxury-hotel-outdoor-pools-turkey.jpg"
-            className="h-full w-full object-cover"
-            alt="banner image"
-          />
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gradient-to-r from-black/60 from-0% to-black/30 to-100%">
-            <h2 className="text-white text-center text-5xl font-bold">
-              My Bookings
-            </h2>
-          </div>
-        </div>
-      </div>
+      <Banner title="My Bookings" />
 
       <div className="container mx-auto pt-10 pb-20">
         <div className="overflow-x-auto">
@@ -171,14 +127,13 @@ const MyBookings = () => {
                   <td>${book.pricePerNight}</td>
                   <td>{book.date}</td>
                   <th>
-                    {/* <Link to={`/update/${book._id}`}> */}
+                    <Link to={`/update/${book._id}`}>
                     <button
-                      onClick={() => handleUpdateDate(book._id)}
                       className="btn btn-success btn-sm text-xs m-2"
                     >
                       Update Date
                     </button>
-                    {/* </Link> */}
+                    </Link>
                     <button
                       onClick={() => handleDelete(book)}
                       className="btn btn-error btn-sm text-xs m-2"
