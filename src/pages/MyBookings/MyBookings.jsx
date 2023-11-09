@@ -3,12 +3,12 @@ import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import moment from 'moment'
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
   const customAxios = useAxios();
   const { currentUser } = useAuth();
-
   useEffect(() => {
     customAxios
       .get(`/bookings?email=${currentUser.email}`)
@@ -18,7 +18,20 @@ const MyBookings = () => {
       .catch((err) => console.log(err.message));
   }, [currentUser?.email, customAxios]);
 
-  const handleDelete = (id) => {
+  const handleDelete = (book) => {
+    const currentDate = moment();
+    const bookingDate = moment(book.date)
+    const remainingDate = bookingDate.diff(currentDate, "days")
+    console.log(book.date);
+    console.log(remainingDate);
+    if(remainingDate === 0){
+      return Swal.fire({
+        icon: "error",
+        title: "Sorry!",
+        text: "You can't cancel your booking now. Because tomorrow is your booked date. You have to cancel befor 1 day.",
+      });
+    }
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -30,12 +43,12 @@ const MyBookings = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         customAxios
-          .delete(`/bookings/${id}`)
+          .delete(`/bookings/${book._id}`)
           .then((res) => {
             console.log(res.data);
             if (res.data.deletedCount > 0) {
               const remaining = bookings.filter(
-                (booking) => booking._id !== id
+                (booking) => booking._id !== book._id
               );
               setBookings(remaining);
               Swal.fire({
@@ -130,7 +143,7 @@ const MyBookings = () => {
                       </button>
                     </Link>
                     <button
-                      onClick={() => handleDelete(book._id)}
+                      onClick={() => handleDelete(book)}
                       className="btn btn-error btn-sm m-2"
                     >
                       delete
