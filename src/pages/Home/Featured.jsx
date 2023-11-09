@@ -9,6 +9,9 @@ import "swiper/css/pagination";
 import { Link } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import { useEffect, useState } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css'
+
 
 const Featured = () => {
   const [featuredRooms, setFeaturedRooms] = useState([]);
@@ -23,6 +26,10 @@ const Featured = () => {
         console.log(err.message);
       });
     }, [customAxios]);
+
+    useEffect(() => {
+      AOS.init();
+    }, [])
 
   return (
     <section className="py-20">
@@ -43,6 +50,7 @@ const Featured = () => {
             spaceBetween: 50,
           },
         }}
+        data-aos="fade-down"
       >
         {featuredRooms.map((room) => (
           <SwiperSlide key={room._id} className="my-14">

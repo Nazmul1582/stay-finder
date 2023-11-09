@@ -6,10 +6,18 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 import { BiSolidQuoteAltLeft } from "react-icons/bi";
+import { useEffect } from "react";
 
 const Testimonial = () => {
+
+  useEffect(() => {
+    AOS.init();
+  }, [])
+
   const testimonials = [
     {
       id: 1,
@@ -74,6 +82,7 @@ const Testimonial = () => {
               spaceBetween: 50,
             },
           }}
+          data-aos="fade-down"
         >
           {testimonials.map((item) => (
             <SwiperSlide key={item.id}>
