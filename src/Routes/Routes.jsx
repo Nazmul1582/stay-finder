@@ -25,12 +25,12 @@ const router = createBrowserRouter([
             {
                 path: "rooms",
                 element: <Rooms />,
-                loader: () => fetch('http://localhost:5000/rooms')
+                loader: () => fetch('https://stay-finder-server.vercel.app/rooms')
             },
             {
                 path: "room-details/:id",
                 element: <RoomDetails />,
-                loader: ({params}) => fetch(`http://localhost:5000/room-details/${params.id}`)
+                loader: ({params}) => fetch(`https://stay-finder-server.vercel.app/room-details/${params.id}`)
             },
             {
                 path: "my-bookings",
@@ -39,12 +39,12 @@ const router = createBrowserRouter([
             {
                 path: "update/:id",
                 element: <Update />,
-                loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                loader: ({params}) => fetch(`https://stay-finder-server.vercel.app/bookings/${params.id}`)
             },
             {
                 path: "/review/:id",
                 element: <Feedback />,
-                loader: ({params}) => fetch(`http://localhost:5000/bookings-review/${params.id}`)
+                loader: ({params}) => fetch(`https://stay-finder-server.vercel.app/bookings-review/${params.id}`)
             },
             {
                 path: "contact",
