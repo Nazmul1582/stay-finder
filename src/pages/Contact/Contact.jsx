@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import Head from "../../layout/Head";
 import GoogleMapReact from "google-map-react";
+import { FaLocationDot } from "react-icons/fa6";
 
 const Contact = () => {
   const handleContact = (event) => {
@@ -27,7 +28,7 @@ const Contact = () => {
     zoom: 11,
   };
 
-  const StayFinder = ({ text }) => <div>{text}</div>;
+  const StayFinder = ({text}) => <div><FaLocationDot className="text-2xl text-red-500" /> <p className="text-gray-400">{text}</p></div>;
 
   return (
     <section className="pb-20 bg-base-100">
@@ -47,7 +48,7 @@ const Contact = () => {
 
       <div className="container mx-auto pt-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-          <div className="shadow-xl shadow-success/30 bg-base-100 border border-success">
+          <div className="shadow-xl shadow-success/30 bg-base-100 border border-success w-full h-full rounded-xl overflow-hidden">
             <GoogleMapReact
               bootstrapURLKeys={{
                 key: "AIzaSyDsR0LvZgT4aTe8Sw4YkfBgVAORFPZipz0",

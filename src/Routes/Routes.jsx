@@ -11,6 +11,7 @@ import RoomDetails from "../pages/RoomDetails/RoomDetails";
 import NotFound from "../pages/NotFound/NotFound";
 import Update from "../pages/Update/Update";
 import Feedback from "../pages/Feedback/Feedback";
+import About from "../pages/About/About";
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />
+            },
+            {
+                path: 'about',
+                element: <About />
             },
             {
                 path: "rooms",
