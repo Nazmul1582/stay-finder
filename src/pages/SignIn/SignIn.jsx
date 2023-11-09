@@ -3,6 +3,7 @@ import image from '../../assets/images/login.png'
 import googleImage from '../../assets/images/google.png'
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
+import Head from '../../layout/Head';
 
 
 const SignIn = () => {
@@ -46,6 +47,7 @@ const SignIn = () => {
 
     return (
         <section className="py-10 bg-base-100">
+          <Head pageTitle="Sign In" />
         <div className="hero">
           <div className="hero-content flex-col lg:flex-row">
             <div className="text-center lg:text-left">

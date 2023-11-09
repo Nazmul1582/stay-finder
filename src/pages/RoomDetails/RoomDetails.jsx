@@ -4,6 +4,7 @@ import useAxios from "../../hooks/useAxios";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import Head from "../../layout/Head";
 
 const RoomDetails = () => {
   const room = useLoaderData();
@@ -104,6 +105,7 @@ const RoomDetails = () => {
 
   return (
     <section className="pb-20">
+      <Head pageTitle="Room Details" />
       <div>
         <div className="h-[300px] relative">
           <img

@@ -1,6 +1,7 @@
 import { Link, useLoaderData } from "react-router-dom";
 import useAxios from "../../hooks/useAxios";
 import { useState } from "react";
+import Head from "../../layout/Head";
 
 const Rooms = () => {
   const loadedRooms = useLoaderData();
@@ -18,6 +19,7 @@ const Rooms = () => {
 
   return (
     <section className="py-20">
+      <Head pageTitle="Rooms" />
       <div className="container mx-auto">
 
         <div className="form-control mb-20">

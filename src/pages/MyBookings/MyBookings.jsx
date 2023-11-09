@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment";
+import Head from "../../layout/Head";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -102,6 +103,7 @@ const MyBookings = () => {
 
   return (
     <section>
+      <Head pageTitle="My Booking" />
       <div>
         <div className="h-[300px] relative">
           <img

@@ -1,3 +1,4 @@
+import Head from "../../layout/Head";
 import Featured from "./Featured";
 import Hero from "./Hero";
 import Newsletter from "./Newsletter";
@@ -7,6 +8,7 @@ import Testimonial from "./Testimonial";
 const Home = () => {
     return (
         <>
+            <Head pageTitle="Home" />
             <Hero />
             <Featured />
             <SpecialOffers />

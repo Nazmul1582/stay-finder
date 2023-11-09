@@ -2,6 +2,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import image from '../../assets/images/signup.png'
 import useAuth from '../../hooks/useAuth'
 import { useState } from 'react';
+import Head from '../../layout/Head';
 
 const SignUp = () => {
   const {createUser} = useAuth()
@@ -33,6 +34,7 @@ const SignUp = () => {
 
     return (
     <section className="py-20 bg-base-100">
+      <Head pageTitle="Sign Up" />
       <div className="hero">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left">

@@ -13,9 +13,11 @@ const Header = () => {
       <li>
         <Link to="/rooms">Rooms</Link>
       </li>
-      <li>
+      {
+        currentUser && <li>
         <Link to="/my-bookings">My Bookings</Link>
       </li>
+      }
       <li>
         <Link to="/contact">Contact</Link>
       </li>

@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 // import { useEffect } from "react";
 import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
+import Head from "../../layout/Head";
 
 const Feedback = () => {
   const booking = useLoaderData();
@@ -39,6 +40,7 @@ const Feedback = () => {
 
   return (
     <section>
+      <Head pageTitle="Review" />
       <div className="h-[300px] relative">
         <img
           src="https://i.ibb.co/t8JnrVb/luxury-hotel-outdoor-pools-turkey.jpg"
