@@ -3,7 +3,7 @@ import useAxios from "../../hooks/useAxios";
 import Swal from "sweetalert2";
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import moment from 'moment'
+import moment from "moment";
 
 const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -20,11 +20,10 @@ const MyBookings = () => {
 
   const handleDelete = (book) => {
     const currentDate = moment();
-    const bookingDate = moment(book.date)
-    const remainingDate = bookingDate.diff(currentDate, "days")
-    console.log(book.date);
-    console.log(remainingDate);
-    if(remainingDate === 0){
+    const bookingDate = moment(book.date);
+    const remainingDate = bookingDate.diff(currentDate, "days");
+
+    if (remainingDate === 0) {
       return Swal.fire({
         icon: "error",
         title: "Sorry!",
@@ -68,6 +67,39 @@ const MyBookings = () => {
       }
     });
   };
+
+  const handleUpdateDate = async (id) => {
+    const { value: date } = await Swal.fire({
+      title: "Update your booking date",
+      input: "date",
+      showCancelButton: true,
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Confirm",
+      confirmButtonColor: "#36D399"
+    });
+    if (date) {
+      const updatedDate = { date: date };
+      customAxios
+        .patch(`/bookings/${id}`, updatedDate)
+        .then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Updated!",
+              text: `Your booking date has been updated to ${date}.`,
+              icon: "success",
+            });
+          }
+        })
+        .catch((err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: err.message,
+          });
+        });
+    }
+  };
+
   return (
     <section>
       <div>
@@ -127,7 +159,7 @@ const MyBookings = () => {
                       <div>
                         <div className="font-bold mb-3">{book.name}</div>
                         <Link to={`/review/${book._id}`}>
-                          <button className="btn btn-info btn-sm">
+                          <button className="btn btn-info btn-sm text-xs">
                             Give a review
                           </button>
                         </Link>
@@ -137,14 +169,17 @@ const MyBookings = () => {
                   <td>${book.pricePerNight}</td>
                   <td>{book.date}</td>
                   <th>
-                    <Link to={`/update/${book._id}`}>
-                      <button className="btn btn-success btn-sm m-2">
-                        Update Date
-                      </button>
-                    </Link>
+                    {/* <Link to={`/update/${book._id}`}> */}
+                    <button
+                      onClick={() => handleUpdateDate(book._id)}
+                      className="btn btn-success btn-sm text-xs m-2"
+                    >
+                      Update Date
+                    </button>
+                    {/* </Link> */}
                     <button
                       onClick={() => handleDelete(book)}
-                      className="btn btn-error btn-sm m-2"
+                      className="btn btn-error btn-sm text-xs m-2"
                     >
                       delete
                     </button>
