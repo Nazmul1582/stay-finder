@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import Review from "./Review";
 import useAxios from "../../hooks/useAxios";
 import { useState } from "react";
@@ -23,11 +23,16 @@ const RoomDetails = () => {
   } = room;
   const [available, setAvailable] = useState(availability);
   const { currentUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleBooking = (event) => {
     event.preventDefault();
     const date = event.target.date.value;
 
+    if(!currentUser){
+      return navigate("/sign-in")
+    }
+    
     if (!available) {
       return Swal.fire({
         title: "Oops!",
@@ -38,7 +43,7 @@ const RoomDetails = () => {
 
     const booking = {
       productId: _id,
-      email: currentUser.email,
+      email: currentUser?.email,
       image,
       name,
       date,

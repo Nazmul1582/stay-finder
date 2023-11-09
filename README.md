@@ -12,4 +12,3 @@
 - Authenticate user can update his booking date from My Booking page
 - Authenticate user can cancel his booking from My Booking page at least 1 day ago.
 - Authenticate user can give a review of his booking and his review will be shown in the product details page.
-- 
