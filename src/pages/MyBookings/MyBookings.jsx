@@ -133,7 +133,7 @@ const MyBookings = () => {
                       onClick={() => handleDelete(book._id)}
                       className="btn btn-error btn-sm m-2"
                     >
-                      Cancel
+                      delete
                     </button>
                   </th>
                 </tr>
