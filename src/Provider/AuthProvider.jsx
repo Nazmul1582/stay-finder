@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 import {
+  FacebookAuthProvider,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
@@ -14,7 +15,8 @@ import useAxios from "../hooks/useAxios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -71,7 +73,11 @@ const AuthProvider = ({ children }) => {
   };
 
   const signInWithGoogle = () => {
-    return signInWithPopup(auth, provider);
+    return signInWithPopup(auth, googleProvider);
+  };
+
+  const signInWithFacebook = () => {
+    return signInWithPopup(auth, facebookProvider);
   };
 
   const authInfo = {
@@ -81,6 +87,7 @@ const AuthProvider = ({ children }) => {
     signIn,
     logout,
     signInWithGoogle,
+    signInWithFacebook
   };
 
   return (

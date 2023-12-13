@@ -1,6 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import image from '../../assets/images/login.png'
 import googleImage from '../../assets/images/google.png'
+import facebookImage from '../../assets/images/facebook-icon.png'
 import { useState } from 'react';
 import useAuth from '../../hooks/useAuth';
 import Head from '../../layout/Head';
@@ -9,7 +10,7 @@ import Head from '../../layout/Head';
 const SignIn = () => {
     const [loading, setLoading] = useState()
     const [error, setError] = useState("")
-    const { signIn, signInWithGoogle } = useAuth();
+    const { signIn, signInWithGoogle, signInWithFacebook } = useAuth();
     const navigate = useNavigate()
 
     const handleSignIn = async(event) => {
@@ -43,6 +44,17 @@ const SignIn = () => {
         setError(err.message)
       }
 
+    }
+    const handleSignInWithFacebook = async() => {
+      try{
+        setError("")
+        setLoading(true)
+        await signInWithFacebook()
+        navigate("/")
+      }catch(err){
+        setLoading(false)
+        setError(err.message)
+      }
     }
 
     return (
@@ -88,9 +100,13 @@ const SignIn = () => {
                 </div>
                 <div className="divider">OR</div>
                 <div className="form-control">
-                  <button onClick={handleSignInWithGoogle} className="btn btn-success bg-white hover:bg-white hover:shadow-success/30 hover:shadow-lg">
+                  <button onClick={handleSignInWithGoogle} className="btn btn-success bg-white hover:bg-white hover:shadow-success/30 hover:shadow-lg mb-5">
                     <img className='w-10' src={googleImage} alt="google logo" />
                     Sign In with Google
+                </button>
+                  <button onClick={handleSignInWithFacebook} className="btn btn-success bg-white hover:bg-white hover:shadow-success/30 hover:shadow-lg">
+                    <img className='w-10' src={facebookImage} alt="facebook logo" />
+                    Sign In with Facebook
                 </button>
                 </div>
               </form>
